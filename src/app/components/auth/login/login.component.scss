@@ -1,0 +1,25 @@
+@import '../../../../styles.scss';
+.mat-mdc-card{
+    width: 30%;
+    margin-left:35%;
+    margin-top:3%
+}
+.mat-mdc-form-field{
+    width: 100%;
+}
+.mdc-button{
+    margin: 2%;
+}
+.mat-mdc-card-header{
+    margin-left: 1%;
+}
+.heading{
+    text-align: center;
+    margin-top: 50px;
+    color: $primary_color;
+}
+.mat-error {
+    color: red;
+    font-size: 12px;
+  }
+  

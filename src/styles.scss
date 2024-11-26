@@ -1,2 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
 $primary_color: #04345C;
+$button_color: #364E6D;
+
+.primary_color {
+  background-color: $button_color !important;
+  color: white !important;
+}
+
+
+// snackbar css
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: $primary_color !important;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+  color: white !important;
+}
+
+// snackbar css

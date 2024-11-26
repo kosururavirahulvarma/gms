@@ -1,0 +1,116 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormsModule,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { LoginService } from '../../../services/login/login.service';
+import { Router, RouterLink } from '@angular/router';
+import { Loginmodel } from '../../../model/Loginmodel';
+import { RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { loginConstants } from '../../../constants/Auth/login.constants';
+import { MatSnackBar } from '@angular/material/snack-bar';
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
+    CommonModule,
+    RouterModule,
+    RouterLink,
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+})
+export class LoginComponent implements OnInit {
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: LoginService,
+    private router: Router,
+    private cookies: CookieService
+  ) {
+    this.initiateForm();
+  }
+
+  private snackBar = inject(MatSnackBar);
+  ngOnInit(): void {
+    this.cookies.delete('username');
+  }
+  // _logindata:Loginmodel={
+  //   username: '',
+  //   password: ''
+  // }
+  errorUserNameMessage = signal('');
+  errorPasswordMessage = signal('');
+
+  loginForm!: FormGroup;
+  initiateForm() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(loginConstants.REGULAREXPRESSION.PASSWORD),
+        ],
+      ],
+    });
+  }
+  proceedLogin() {
+    if (this.loginForm.valid) {
+      const formValue = this.loginForm.getRawValue();
+      if (
+        formValue.username === 'admin' &&
+        formValue.password === 'Trade#123'
+      ) {
+        this.cookies.set('username', formValue.username);
+        this.router.navigateByUrl('home');
+      } else {
+        this.snackBar.open('Incorrect Credentials.', 'OK', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        this.errorUserNameMessage.set(
+          loginConstants.ERRORMESSAGE.USERNAMEERROR.REQUIRED
+        );
+        this.errorPasswordMessage.set(
+          loginConstants.ERRORMESSAGE.PASSWORDERROR.REQUIRED
+        );
+        this.loginForm.reset();
+
+        // alert('Incorrect Credentials')
+      }
+    }
+  }
+  updateErrorMessage() {
+    //UserName Validations
+    if (this.loginForm.controls['username'].hasError('required')) {
+      this.errorUserNameMessage.set(
+        loginConstants.ERRORMESSAGE.USERNAMEERROR.REQUIRED
+      );
+    }
+
+    //Password Validations
+    if (this.loginForm.controls['password'].hasError('required')) {
+      this.errorPasswordMessage.set(
+        loginConstants.ERRORMESSAGE.PASSWORDERROR.REQUIRED
+      );
+    } else if (this.loginForm.controls['password'].hasError('pattern')) {
+      this.errorPasswordMessage.set(
+        loginConstants.ERRORMESSAGE.PASSWORDERROR.PATTERN
+      );
+    }
+  }
+}
