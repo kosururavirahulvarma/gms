@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Loginmodel, User } from '../../model/Loginmodel';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  private snackBar = inject(MatSnackBar);
   constructor(private http: HttpClient, private cookies: CookieService) {}
   proceedlogin(_data: Loginmodel) {
     return this.http.get<User[]>(
@@ -17,6 +19,18 @@ export class LoginService {
   }
 
   isLoggedIn() {
-    return this.cookies.get('username') != '';
+    let isLoggedIn = this.cookies.get('username');
+    if (isLoggedIn === '') {
+      this.snackBar.open(
+        'You must be logged in to access this application. Please log in first.',
+        'OK',
+        {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        }
+      );
+    }
+    return isLoggedIn != '';
   }
 }

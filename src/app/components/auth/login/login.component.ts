@@ -47,10 +47,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.cookies.delete('username');
   }
-  // _logindata:Loginmodel={
-  //   username: '',
-  //   password: ''
-  // }
+
   errorUserNameMessage = signal('');
   errorPasswordMessage = signal('');
 
