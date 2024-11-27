@@ -1,4 +1,6 @@
+@import '../../../../styles.scss';
 .header{
+    background-color: $white_color !important;
     display: flex;
     justify-content: space-between;
 }

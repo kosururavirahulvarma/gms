@@ -1,17 +1,25 @@
+<div class="state-container">
 <mat-toolbar>
     <button (click)="showDropIcon()" class="button-home" [matMenuTriggerFor]="menu">
         <div class="button-label"><span>home</span><mat-icon>keyboard_arrow_down</mat-icon></div>
     </button>
 </mat-toolbar>
-@if (showDrop) {
+<!-- @if (showDrop) {
 <div class="drop-up">
     <mat-icon>arrow_drop_up</mat-icon>
 </div>
-}
+} -->
+<br>
+<mat-toolbar class="state-bar">
+    <div class="state-bar-text">
+        <span>{{currentRoute}}</span>
+    </div>
+  </mat-toolbar>
 <mat-menu #menu="matMenu">
     <div class="navlist">
     @for (item of navListItems; track $index) {
-    <a class="item-button">{{item}}</a>
+        <a class="item-button" (click)="navitageTo(item.route)">{{item.label}}</a>
     }
     </div>
 </mat-menu>
+</div>
