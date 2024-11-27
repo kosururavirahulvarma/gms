@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { HomeNavList } from '../../../model/HomeNavList';
 import { Router, RouterLink } from '@angular/router';
+import { NavigationserviceService } from '../../../services/navigation/navigationservice.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,28 +21,36 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router) {}
+  history: string[] = [];
+  constructor(
+    private router: Router,
+    private navigationserviceService: NavigationserviceService
+  ) {}
   navListItems: HomeNavList[] = [
     {
       label: 'Opportunity Finder',
-      route: 'opportunity',
+      route: 'home/opportunity',
     },
     {
       label: 'Favorites',
-      route: 'favorites',
+      route: 'home/favorites',
     },
     {
       label: 'Remainders',
-      route: 'reminder',
+      route: 'home/reminder',
     },
   ];
-
 
   currentRoute: string = '';
   showDrop: boolean = false;
 
   ngOnInit(): void {
-    this.currentRoute = this.router.url; // Get the current route URL
+    this.navigationserviceService.history$.subscribe((history) => {
+      this.history = [];
+      this.history = history;
+      console.log('history component');
+      console.log(history);
+    });
   }
 
   showDropIcon() {
@@ -50,6 +59,8 @@ export class NavbarComponent implements OnInit {
   }
 
   navitageTo(router: string) {
-    this.router.navigate(['home/' + router]);
+    console.log('route to ');
+    console.log(router);
+    this.router.navigate([router]);
   }
 }

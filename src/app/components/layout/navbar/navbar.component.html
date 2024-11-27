@@ -11,9 +11,18 @@
 } -->
 <br>
 <mat-toolbar class="state-bar">
+    @for (item of history; track $index) {
+    @if (history.length-2 == $index) {
     <div class="state-bar-text">
-        <span>{{currentRoute}}</span>
+        <a class="nav-underline" (click)="navitageTo(item)">{{item}}</a>
     </div>
+    }@else {
+    <div class="state-bar-text">
+        <a>{{item}}</a>
+    </div>
+    }
+    
+    }
   </mat-toolbar>
 <mat-menu #menu="matMenu">
     <div class="navlist">
