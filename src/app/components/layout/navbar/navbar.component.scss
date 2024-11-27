@@ -30,6 +30,7 @@ mat-toolbar {
     margin: 10px 6px 6px 10px;
 
     &:hover { /* Corrected selector for hover */
+        cursor: pointer;
         color: $white_color !important;
         font-weight: bolder !important;
         margin: 10px 6px 6px 10px;
