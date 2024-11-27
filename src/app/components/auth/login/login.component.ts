@@ -49,23 +49,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.cookies.delete('username');
   }
-
+  loginError = signal('');
   ngAfterViewInit(): void {
     this.route.queryParams.subscribe((params) => {
       const redirect = params['redirect'];
       const user = params['user'];
       console.log('Redirect:', redirect, 'User:', user);
       if (user != null && user == 'guest') {
-        this.toastr.error(
-          'You must be logged in to access this application. Please log in first.',
-          '',
-          {
-            positionClass: 'toast-top-center',
-          }
+        this.loginError.set(
+          'You must be logged in to access this application. Please log in first.'
         );
-        setTimeout(() => {
-          this.toastr.clear();
-        }, 3000);
       }
     });
   }
