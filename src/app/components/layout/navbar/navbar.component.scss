@@ -1,0 +1,50 @@
+@import '../../../../styles.scss';
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    background-color: $button_color !important;
+    height: 28px;
+    color: $white_color !important;
+}
+
+.button-home {
+    background-color: transparent;
+    height: 28px;
+    border: none;
+    color: white;
+    // position: relative;
+    // top: 15px;
+}
+
+.button-label {
+    display: flex;
+    align-items: center;
+}
+
+.item-button {
+    color: $white_color !important;
+}
+
+.drop-up {
+    position: relative;
+    left: 15px;
+    bottom: 14px;
+    color: $white_color;
+}
+
+.item-button {
+    transition: font-size 0.3s ease, font-weight 0.3s ease; // Smooth transition
+
+    &:hover {
+        font-size: 18px; // Increase text size on hover
+        font-weight: bold; // Make the text bold on hover
+    }
+}
+
+
+// .navlist {
+//     cursor: pointer !important;
+// }
