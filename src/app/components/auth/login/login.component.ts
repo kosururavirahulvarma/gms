@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../../services/login/login.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Loginmodel } from '../../../model/Loginmodel';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -40,13 +40,34 @@ export class LoginComponent implements OnInit {
     private service: LoginService,
     private router: Router,
     private cookies: CookieService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {
     this.initiateForm();
   }
 
   ngOnInit(): void {
     this.cookies.delete('username');
+  }
+
+  ngAfterViewInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const redirect = params['redirect'];
+      const user = params['user'];
+      console.log('Redirect:', redirect, 'User:', user);
+      if (user != null && user == 'guest') {
+        this.toastr.error(
+          'You must be logged in to access this application. Please log in first.',
+          '',
+          {
+            positionClass: 'toast-top-center',
+          }
+        );
+        setTimeout(() => {
+          this.toastr.clear();
+        }, 3000);
+      }
+    });
   }
 
   errorUserNameMessage = signal('');
@@ -75,7 +96,7 @@ export class LoginComponent implements OnInit {
         this.cookies.set('username', formValue.username);
         this.router.navigateByUrl('home');
       } else {
-        this.toastr.error('Incorrect Credentials.', 'OK', {
+        this.toastr.error('Incorrect Credentials.', '', {
           timeOut: 3000,
           positionClass: 'toast-top-center',
         });
