@@ -26,7 +26,16 @@ mat-toolbar {
 
 .item-button {
     color: $white_color !important;
+    font-weight: lighter !important;
+    margin: 10px 6px 6px 10px;
+
+    &:hover { /* Corrected selector for hover */
+        color: $white_color !important;
+        font-weight: bolder !important;
+        margin: 10px 6px 6px 10px;
+    }
 }
+
 
 .drop-up {
     position: relative;
@@ -35,16 +44,8 @@ mat-toolbar {
     color: $white_color;
 }
 
-.item-button {
-    transition: font-size 0.3s ease, font-weight 0.3s ease; // Smooth transition
 
-    &:hover {
-        font-size: 18px; // Increase text size on hover
-        font-weight: bold; // Make the text bold on hover
-    }
+.navlist {
+    display: flex;
+    flex-direction: column;
 }
-
-
-// .navlist {
-//     cursor: pointer !important;
-// }

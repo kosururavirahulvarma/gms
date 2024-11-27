@@ -8,8 +8,10 @@
     <mat-icon>arrow_drop_up</mat-icon>
 </div>
 }
-<mat-menu class="navlist" #menu="matMenu">
+<mat-menu #menu="matMenu">
+    <div class="navlist">
     @for (item of navListItems; track $index) {
-    <button class="item-button" mat-menu-item>{{item}}</button>
+    <a class="item-button">{{item}}</a>
     }
+    </div>
 </mat-menu>
