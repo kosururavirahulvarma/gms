@@ -16,7 +16,8 @@ import { Loginmodel } from '../../../model/Loginmodel';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { loginConstants } from '../../../constants/Auth/login.constants';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -38,12 +39,12 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: LoginService,
     private router: Router,
-    private cookies: CookieService
+    private cookies: CookieService,
+    private toastr: ToastrService
   ) {
     this.initiateForm();
   }
 
-  private snackBar = inject(MatSnackBar);
   ngOnInit(): void {
     this.cookies.delete('username');
   }
@@ -77,11 +78,11 @@ export class LoginComponent implements OnInit {
         this.cookies.set('username', formValue.username);
         this.router.navigateByUrl('home');
       } else {
-        this.snackBar.open('Incorrect Credentials.', 'OK', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
+        this.toastr.error('Incorrect Credentials.', 'OK', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center',
         });
+
         this.errorUserNameMessage.set(
           loginConstants.ERRORMESSAGE.USERNAMEERROR.REQUIRED
         );
