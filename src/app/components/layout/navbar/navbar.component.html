@@ -1,7 +1,7 @@
 <div class="state-container">
 <mat-toolbar>
     <button (click)="showDropIcon()" class="button-home" [matMenuTriggerFor]="menu">
-        <div class="button-label"><span>home</span><mat-icon>keyboard_arrow_down</mat-icon></div>
+        <div class="button-label"><span>Home</span><mat-icon>keyboard_arrow_down</mat-icon></div>
     </button>
 </mat-toolbar>
 <!-- @if (showDrop) {
@@ -11,19 +11,12 @@
 } -->
 <br>
 <mat-toolbar class="state-bar">
-    @for (item of history; track $index) {
-    @if (history.length-2 == $index) {
+@for (history of navigationHistory.routeHistory; track $index) {
     <div class="state-bar-text">
-        <a class="nav-underline" (click)="navitageTo(item)">{{item}}</a>
+        <a [routerLink]="history.path">{{history.routeName | titlecase}}</a>
     </div>
-    }@else {
-    <div class="state-bar-text">
-        <a>{{item}}</a>
-    </div>
-    }
-    
-    }
-  </mat-toolbar>
+}
+</mat-toolbar>
 <mat-menu #menu="matMenu">
     <div class="navlist">
     @for (item of navListItems; track $index) {

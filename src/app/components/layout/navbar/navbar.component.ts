@@ -3,9 +3,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
-import { HomeNavList } from '../../../model/HomeNavList';
+import { HomeNavList, NavigationHistory } from '../../../model/HomeNavList';
 import { Router, RouterLink } from '@angular/router';
 import { NavigationserviceService } from '../../../services/navigation/navigationservice.service';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -16,12 +17,15 @@ import { NavigationserviceService } from '../../../services/navigation/navigatio
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    TitleCasePipe,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
-  history: string[] = [];
+  navigationHistory: NavigationHistory = {
+    routeHistory: [],
+  };
   constructor(
     private router: Router,
     private navigationserviceService: NavigationserviceService
@@ -46,8 +50,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.navigationserviceService.history$.subscribe((history) => {
-      this.history = [];
-      this.history = history;
+      console.log(history);
+      // this.history = history;
+      this.navigationHistory = history;
       console.log('history component');
       console.log(history);
     });
@@ -59,8 +64,6 @@ export class NavbarComponent implements OnInit {
   }
 
   navitageTo(router: string) {
-    console.log('route to ');
-    console.log(router);
     this.router.navigate([router]);
   }
 }
