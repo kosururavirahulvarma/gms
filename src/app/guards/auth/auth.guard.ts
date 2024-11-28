@@ -8,6 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (service.isLoggedIn()) {
     return true;
   } else {
+    alert('Unauthorized access..');
     router.navigate(['/login'], {
       queryParams: { user: 'guest' },
     });

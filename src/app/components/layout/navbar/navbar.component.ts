@@ -44,7 +44,22 @@ export class NavbarComponent implements OnInit {
       route: 'home/reminder',
     },
   ];
-
+  
+  headingBar = [
+    {
+      label: 'Opportunity Finder Home',
+      route: 'opportunity',
+    },
+    {
+      label: 'Favorites',
+      route: 'favorites',
+    },
+    {
+      label: 'Remainders',
+      route: 'reminder',
+    },
+  ];
+  
   currentRoute: string = '';
   showDrop: boolean = false;
 

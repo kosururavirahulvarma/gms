@@ -25,3 +25,14 @@
     </div>
 </mat-menu>
 </div>
+@for (item of headingBar; track $index) {
+    @if (item.route === navigationHistory.routeHistory[navigationHistory.routeHistory.length-1].routeName) {
+<div class="state-heading-bar-container">
+    <mat-toolbar class="state-heading-bar">
+        <div class="state-heading">
+            <a>{{item.label}}</a>
+        </div>
+    </mat-toolbar>
+</div>
+}
+}

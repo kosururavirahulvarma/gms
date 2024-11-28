@@ -90,3 +90,33 @@ flex-direction: column;
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
     padding: 0 3px 0 3px;
 }
+.state-heading-bar-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 32%;
+    margin-top: 15px;
+}
+
+.state-heading-bar {
+    padding: 6px 8px 0px 5px;
+    list-style: none;
+    background-color: $button_color !important;
+    border-radius: 5px 5px 0px 0px;
+    border: 1px solid #EAEAEC !important;
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+    width: 38% !important;
+    height: 20px !important;
+    margin: 0 !important;
+    box-sizing: unset !important;
+    color: $white_color !important;
+}
+
+.state-heading {
+    display: inline !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    margin-bottom: 5px !important;
+    margin-left: 5px;
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+}
