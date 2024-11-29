@@ -1,1 +1,60 @@
-<p>opportunity-finder works!</p>
+<div class="parent">
+    <div class="childseach">
+        <div class="title-search">
+            <p>Search</p>
+        </div>
+        <div class="search-text">
+            <p>Enter your Research Abstract</p>
+            <textarea placeholder="Please enter at least 20 words" [(ngModel)]="selectedTextArea">
+        </textarea>
+        </div>
+        <div class="search-bar">
+            <button class="button" (click)="getRecommendedOpp()">
+                Get Recommended Opportunities
+            </button>
+        </div>
+        <div class="or-divider">
+
+            <span>OR</span>
+
+        </div>
+        <div class="search-keyword">
+            <p>Search by keywords</p>
+            <div class="keyword-types">
+                <div class="keyword-types-select">
+                    <select class="select-box" [(ngModel)]="selectedDropOption">
+                        <option value="1 selected">1 selected</option>
+                        <option value="2 selected">2 selected</option>
+                        <option value="3 selected">3 selected</option>
+                        <option value="4 selected">4 selected</option>
+                    </select>
+                </div>
+                <div class="keyword-types-input">
+                    <input type="text" class="text-box" placeholder="Write comma (,) seperated.." [(ngModel)]="selectedTextInput">
+                </div>
+                <div class="radio-buttons">
+                    <label>
+                        <input type="radio" class="radio-box" name="options" [(ngModel)]="selectedRadioOption"
+                            [value]="'any'" />Any
+                    </label>
+                    <label>
+                        <input type="radio" class="radio-box" name="options" [(ngModel)]="selectedRadioOption"
+                            [value]="'all'" />All
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="search-bar">
+            <button class="button" (click)="goSearch()">
+                Search
+            </button>
+        </div>
+    </div>
+    <div class="childresults">
+        <div class="title-search">
+            <p>Results</p>
+        </div>
+        <!-- Results content -->
+    </div>
+</div>
