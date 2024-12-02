@@ -1,14 +1,17 @@
 <div>
-    <h2>{{ data.opportunity_title }}</h2>
-    <mat-dialog-content>
-        <p><strong>Opportunity ID :</strong> {{ data.opportunity_number }}</p>
-        <p><strong>Agency :</strong> {{ data.agency_name }}</p>
-        <p><strong>Deadline :</strong> {{ data.close_date | formatDate}}</p>
-        <p><strong>Description :</strong> {{ data.description}}</p>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-        <button (click)="close()" class="button">
-            Close
-        </button>
-    </mat-dialog-actions>
+    <div class="header">
+        <h2>{{ data.opportunity_number }}</h2>
+        
+            <mat-icon (click)="close()" matTooltip="close" >close</mat-icon> <!-- Cross icon for closing -->
+       
+        </div>
+        <div>
+        <mat-dialog-content>
+            <p><strong>Opportunity Title :</strong> {{  data.opportunity_title }}</p>
+            <p><strong>Agency :</strong> {{ data.agency_name }}</p>
+            <p><strong>Deadline :</strong> {{ data.close_date | formatDate}}</p>
+            <p><strong>Grant URL :</strong> {{ data.grant_url}}</p>
+            <p><strong>Description :</strong> {{ data.description}}</p>
+        </mat-dialog-content>
+    </div>
 </div>

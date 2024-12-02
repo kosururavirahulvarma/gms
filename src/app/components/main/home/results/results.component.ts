@@ -317,6 +317,8 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     });
     this.dialog.open(ViewmoredialogComponent, {
       data: element?._source,
+      height: '400px',
+      width: '1000px',
     });
   }
   addToFav(row: OpportunityData) {

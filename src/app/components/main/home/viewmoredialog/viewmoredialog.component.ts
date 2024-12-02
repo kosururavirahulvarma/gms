@@ -9,6 +9,8 @@ import {
 } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormatDatePipe } from '../../../../pipes/format-date.pipe';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-viewmoredialog',
@@ -20,6 +22,8 @@ import { FormatDatePipe } from '../../../../pipes/format-date.pipe';
     MatDialogClose,
     MatButtonModule,
     FormatDatePipe,
+    MatIcon,
+    MatTooltip
   ],
   templateUrl: './viewmoredialog.component.html',
   styleUrl: './viewmoredialog.component.scss',

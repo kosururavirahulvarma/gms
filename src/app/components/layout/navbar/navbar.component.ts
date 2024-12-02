@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
       route: 'favorites',
     },
     {
-      label: 'Remainders',
+      label: 'Reminders',
       route: 'reminder',
     },
   ];
