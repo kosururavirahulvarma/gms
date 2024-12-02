@@ -1,0 +1,101 @@
+@import '../../../../../styles.scss';
+
+.filter-container {
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.agency {
+    padding-top: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
+    height: 60px;
+}
+
+.select-agency {
+    position: relative;
+    bottom: 7px;
+    font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+    font-size: 14px;
+}
+.date-range-start{
+     font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+    font-size: 14px;
+    padding: 0% !important;
+    margin-left: 7px;
+}
+.date-range-end{
+    font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+   font-size: 14px;
+   margin-left: 7px;
+}
+.date-range {
+    position: relative;
+    bottom: 7px;
+}
+
+.deadline {
+    padding-top: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
+    height: 60px;
+}
+
+table {
+    width: 100%;
+    background-color: #f5f5f5;
+}
+
+
+.filter {
+    font-size: 14px;
+    width: 100%;
+    height: 60px;
+}
+
+td {
+    width: 25%;
+    height: 50px;
+}
+
+th {
+    font-weight: bold;
+    width: 25%;
+    height: 50px;
+    color: $primary_color;
+    text-decoration: underline;
+    text-decoration-color: $primary_color;
+}
+.icons-td{
+    padding: 0px !important;
+}
+.mat-icon{
+    padding: 2px;
+    cursor: pointer;
+    color: $primary_color;
+}
+.deadline-td{
+    width: 25px;
+}
+.title-td{
+    width: 50%;
+}
+mat-option{
+font-size: 14px;
+}
+.refresh{
+    margin-bottom: 19px !important;
+    color:$white_color !important;
+    background-color: $primary_color !important;
+    font-weight: bold !important;
+    padding: 0px;
+    height: 24px !important;
+    border-radius: 10px;
+    margin-left: 25px;
+    &:hover{
+        background-color:$button_hover !important;
+        color: $primary_color !important;
+    }
+}

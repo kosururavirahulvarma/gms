@@ -1,7 +1,6 @@
 // /* You can add global styles to this file, and also import other style files */
 html,
 body {
-  background-color: #e6e6fa;
   height: 100%;
 }
 
@@ -13,6 +12,7 @@ $primary_color: #04345C;
 $button_color: #364E6D;
 $white_color : white;
 $navlist_bg: #00345b;
+$button_hover: #ebb462;
 
 .primary_color {
   background-color: $button_color !important;
@@ -32,4 +32,17 @@ $navlist_bg: #00345b;
     font-size: 14px !important;
     font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
 }
+.font-family{
+  font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+}
 
+.toast-top-right {
+  top: 170px !important;       /* Distance from the top of the page */
+  right: 200px !important;     /* Distance from the right of the page */
+  position: fixed !important; /* Ensures it stays in place */
+  z-index: 9999 !important;   /* Stays above other elements */
+}
+
+.mat-mdc-paginator{
+background-color: #f5f5f5;
+}

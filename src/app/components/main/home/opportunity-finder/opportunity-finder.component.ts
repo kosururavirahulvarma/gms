@@ -4,11 +4,15 @@ import { MatCard, MatCardContent, MatCardModule } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import {MatSelect, MatSelectModule} from '@angular/material/select';
+import { ResultsComponent } from '../results/results.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-opportunity-finder',
   standalone: true,
-  imports: [MatCardModule, MatSelectModule, MatInputModule, MatSelect,MatInput,FormsModule],
+  imports: [MatCardModule,MatIconModule,MatButtonModule,MatToolbarModule,ResultsComponent, MatSelectModule, MatInputModule, MatSelect,MatInput,FormsModule],
   templateUrl: './opportunity-finder.component.html',
   styleUrl: './opportunity-finder.component.scss'
 })

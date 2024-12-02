@@ -69,7 +69,7 @@ flex-direction: column;
     border: 1px solid  #EAEAEC !important;
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
     width: 80% !important;
-    height: 20px !important;
+    height: 25px !important;
     margin: 0 !important;
     box-sizing: unset !important;
     color: black !important;
@@ -79,6 +79,8 @@ flex-direction: column;
     display: inline;
     font-size: 12px;
     font-weight: normal !important;
+    margin-bottom: 2px;
+    margin-left: 3px;
 }
 
 .state-bar-text:not(:last-child)::after {
@@ -106,7 +108,7 @@ flex-direction: column;
     border: 1px solid #EAEAEC !important;
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
     width: 38% !important;
-    height: 20px !important;
+    height: 30px !important;
     margin: 0 !important;
     box-sizing: unset !important;
     color: $white_color !important;
