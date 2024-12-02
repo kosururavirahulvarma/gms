@@ -1,7 +1,7 @@
 <mat-label style="position: relative;margin-left: 35px;bottom: 10px;font-weight: bold; color: #04345C ;"
   class="font-family">Agency</mat-label>
 <mat-form-field class="agency">
-  <mat-select  (selectionChange)="applyFilters()" class="font-family" [(value)]="selectedAgency" class="select-agency">
+  <mat-select (selectionChange)="applyFilters()" class="font-family" [(value)]="selectedAgency" class="select-agency">
     <mat-option class="font-family" value='' disabled>-- Select an agency --</mat-option>
     @for (agency of agencies; track agency) {
     <mat-option class="font-family" [value]="agency.value">{{agency.viewValue}}</mat-option>
@@ -60,20 +60,25 @@
 
       <ng-container matColumnDef="Action">
         <th class="font-family" mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-        <td class="icons-td font-family" mat-cell *matCellDef="let row">
-          <mat-icon (click)="view()"  matTooltip="View" aria-label="View Icon">visibility</mat-icon>
+        <td class="font-family" mat-cell *matCellDef="let row"   [ngClass]="screen != 'favorites' ? 'icons-td' : '' ">
+          <mat-icon (click)="view(row)" matTooltip="View" aria-label="View Icon">visibility</mat-icon>
           @if(!row.Action.favorite){
-          <mat-icon (click)="addToFav(row)"  matTooltip="Add To Favorites" aria-label="Favorite Icon">favorite_border</mat-icon>
+          <mat-icon (click)="addToFav(row)" matTooltip="Add To Favorites"
+            aria-label="Favorite Icon">favorite_border</mat-icon>
           }@else{
-            <mat-icon (click)="removeFromFav(row)"  matTooltip="Remove From Favorites" aria-label="Favorite Icon">favorite</mat-icon>
+          <mat-icon (click)="removeFromFav(row)" matTooltip="Remove From Favorites"
+            aria-label="Favorite Icon">favorite</mat-icon>
           }
+          @if(screen != "favorites"){
           @if(!row.Action.remainder){
           <mat-icon (click)="setRemainder(row)" matTooltip="Set Remainder" aria-label="Alarm Icon">alarm_add</mat-icon>
           }@else{
-            <mat-icon (click)="clearRemainder(row)" matTooltip="Clear Remainder" aria-label="Alarm Icon">alarm_on</mat-icon>
+          <mat-icon (click)="clearRemainder(row)" matTooltip="Clear Remainder"
+            aria-label="Alarm Icon">alarm_on</mat-icon>
           }
+        }
         </td>
-        
+
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -81,7 +86,11 @@
 
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
+        @if(opportunitiesList.length === 0){
+        <td class="mat-cell" colspan="4">No records to display</td>
+        }@else{
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        }
       </tr>
     </table>
 

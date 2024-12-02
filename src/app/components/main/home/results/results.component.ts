@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -6,7 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -31,6 +38,8 @@ import { Router } from '@angular/router';
 import { NavigationserviceService } from '../../../../services/navigation/navigationservice.service';
 import { FormatDatePipe } from '../../../../pipes/format-date.pipe';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewmoredialogComponent } from '../viewmoredialog/viewmoredialog.component';
 import { ToastMessages } from '../../../../constants/Toaster/toaster.messages.constants';
 @Component({
   selector: 'app-results',
@@ -55,6 +64,7 @@ import { ToastMessages } from '../../../../constants/Toaster/toaster.messages.co
     FormatDatePipe,
     MatTooltip,
     MatTooltipModule,
+    CommonModule,
   ],
   templateUrl: './results.component.html',
   styleUrl: './results.component.scss',
@@ -67,6 +77,7 @@ export class ResultsComponent implements AfterViewInit, OnInit {
   filterOpportunitiesList: OpportunityData[] = [];
   favOpportunities: OpportunityEs[] = [];
   selectedAgency: any = '';
+  @Input() screen!: string;
   agencies: Agency[] = [
     { value: 0, viewValue: 'Animal and Plant Health Inspection Service' },
     { value: 1, viewValue: 'National Science Foundation' },
@@ -96,15 +107,25 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     private router: Router,
     private navigationserviceService: NavigationserviceService
   ) {
-    // Create 100 users
     this.opportunities.forEach((opportunity) => {
       this.opportunitiesList.push(this.createNewUser(opportunity));
     });
-
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.opportunitiesList);
   }
+  readonly dialog = inject(MatDialog);
   ngOnInit(): void {
+    const favOpportunities = localStorage.getItem('favOpportunities');
+    this.favOpportunities = favOpportunities
+      ? JSON.parse(favOpportunities)
+      : [];
+    console.log(this.screen + '1');
+    if (this.screen === 'favorites') {
+      this.opportunitiesList = [];
+      this.favOpportunities.forEach((opportunity) => {
+        this.opportunitiesList.push(this.createNewUser(opportunity));
+      });
+      this.dataSource.data = this.opportunitiesList;
+    }
     this.navigationserviceService.history$.subscribe((history) => {
       console.log(history);
       // this.history = history;
@@ -131,13 +152,23 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     }
   }
   createNewUser(opportunity: OpportunityEs): OpportunityData {
-    return {
-      Opportunity: opportunity._source.opportunity_number,
-      OpportunityTitle: opportunity._source.opportunity_title,
-      Agency: opportunity._source.agency_name,
-      Deadline: opportunity._source.close_date,
-      Action: { view: false, favorite: false, remainder: false },
-    };
+    if (this.screen === 'favorites') {
+      return {
+        Opportunity: opportunity._source.opportunity_number,
+        OpportunityTitle: opportunity._source.opportunity_title,
+        Agency: opportunity._source.agency_name,
+        Deadline: opportunity._source.close_date,
+        Action: { view: false, favorite: true, remainder: false },
+      };
+    } else {
+      return {
+        Opportunity: opportunity._source.opportunity_number,
+        OpportunityTitle: opportunity._source.opportunity_title,
+        Agency: opportunity._source.agency_name,
+        Deadline: opportunity._source.close_date,
+        Action: { view: false, favorite: false, remainder: false },
+      };
+    }
   }
 
   // //Agent filter
@@ -278,7 +309,16 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     });
     this.dataSource.data = this.opportunitiesList;
   }
-  view() {}
+  view(row: OpportunityData) {
+    const element = this.opportunities.find((element) => {
+      console.log(element._source.opportunity_number);
+      console.log(row.Opportunity);
+      return element._source.opportunity_number === row.Opportunity;
+    });
+    this.dialog.open(ViewmoredialogComponent, {
+      data: element?._source,
+    });
+  }
   addToFav(row: OpportunityData) {
     console.log(row);
     row.Action.favorite = true;
@@ -291,6 +331,10 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       }
     });
     console.log(this.favOpportunities);
+    localStorage.setItem(
+      'favOpportunities',
+      JSON.stringify(this.favOpportunities)
+    );
     this.callToaster(ToastMessages.ADD_TO_FAV, type);
   }
   removeFromFav(row: OpportunityData) {
@@ -300,6 +344,16 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     this.favOpportunities = this.favOpportunities.filter(
       (fav) => fav._source.opportunity_number !== row.Opportunity
     );
+    localStorage.setItem(
+      'favOpportunities',
+      JSON.stringify(this.favOpportunities)
+    );
+    if(this.screen === 'favorites'){
+      this.opportunitiesList = this.opportunitiesList.filter(
+        (fav) => fav.Opportunity !== row.Opportunity
+      );
+      this.dataSource.data = this.opportunitiesList;
+    }
   }
   setRemainder(row: OpportunityData) {
     row.Action.remainder = true;
