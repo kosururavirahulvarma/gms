@@ -1,0 +1,43 @@
+@import '../../../../../styles.scss';
+
+
+
+h2 {
+    color: $primary_color; // Text color
+    font-size: 14px; // Text size
+    font-weight: bold; // Bold text
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+    padding-left: 25px;
+}
+
+mat-dialog-content {
+    p {
+        font-size: 12px; // Text size
+        font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+        color: black;
+
+        strong {
+            color: $primary_color; // Text color
+        }
+    }
+
+}
+
+mat-dialog-actions {
+    padding-left: 25px;
+
+    .button {
+        color: rgb(245, 245, 245);
+        background-color: $primary_color;
+        height: 30px;
+        border-radius: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+
+        &:hover {
+            background-color: $button_hover !important;
+            color: $primary_color !important;
+        }
+    }
+}
