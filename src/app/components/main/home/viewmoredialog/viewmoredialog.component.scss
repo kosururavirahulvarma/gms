@@ -2,43 +2,30 @@
 
 
 
-mat-dialog-content {
-    padding: 10px;
-    max-height: calc(100vh - 150px); // Adjusted height to account for the heading and actions
-    overflow-y: auto; // Makes the content scrollable
+.view {
+    overflow: hidden !important;
 
-    p {
-        font-size: 12px; // Text size
-        font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
-        color: black;
-
-        strong {
-            color: $primary_color; // Text color
-        }
-    }
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    background-color: $primary_color; // Optional: adds a background color to the heading
-    height: 30px;
-    h2 {
+    .header {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        color: $white_color; // Text color
-        font-size: 12px; // Text size
-        font-weight: bold; // Bold text
-        font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
-        padding-left: 25px;
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        margin: 0;
-      
-    }
-   
+        justify-content: space-between;
+        background-color: $primary_color; // Optional: adds a background color to the heading
+        height: 30px;
+
+        h2 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: $white_color; // Text color
+                font-size: 12px; // Text size
+                font-weight: bold; // Bold text
+                font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+                padding-left: 25px;
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                margin: 0;
+        
+            }
         mat-icon {
             padding-top: 3px;
             cursor: pointer;
@@ -49,5 +36,21 @@ mat-dialog-content {
                 color: red;
             }
         }
+
+        }
     
+    
+        .content {
+            overflow-y: auto !important;
+            max-height: 380px !important; // Adjusted height to account for the heading and actions
+            p {
+                font-size: 12px; // Text size
+                font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+                color: black;
+    
+                strong {
+                    color: $primary_color; // Text color
+                }
+            }
+        }
 }
