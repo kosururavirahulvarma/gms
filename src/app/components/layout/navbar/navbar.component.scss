@@ -107,7 +107,8 @@ flex-direction: column;
     border-radius: 5px 5px 0px 0px;
     border: 1px solid #EAEAEC !important;
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
-    width: 38% !important;
+    width: 26% !important;
+    min-width: 177px;
     height: 30px !important;
     margin: 0 !important;
     box-sizing: unset !important;
@@ -121,4 +122,10 @@ flex-direction: column;
     margin-bottom: 5px !important;
     margin-left: 5px;
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+}
+
+
+.heading-opp{
+    width: 81%;
+
 }

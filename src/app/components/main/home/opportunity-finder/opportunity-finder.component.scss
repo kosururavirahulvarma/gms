@@ -1,11 +1,17 @@
 @import '../../../../../styles.scss';
+.main{
+    display: flex;
+    justify-content: center;
+
 .parent {
     display: flex;
-    flex-direction: row; // Aligns children side by side (row layout)
+    // flex-direction: row; // Aligns children side by side (row layout)
     border: 1px solid #ccc;
-    margin: 0px 185px 0px 181px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
+    // margin: 0px 185px 0px 181px;
+    // font-family: Arial, Helvetica, sans-serif;
+    // font-weight: 700;
+    width: 81%;
+    justify-content: center;
 
     .childseach {
         flex: 0 0 28%; // 40% of the parent's width
@@ -81,17 +87,7 @@
             text-align: right;
 
             .button {
-                color: rgb(245, 245, 245);
-                background-color: $primary_color;
-                height: 30px;
-                border-radius: 5px;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: 700;
-                letter-spacing: 1px;
-                &:hover{
-                    background-color:$button_hover !important;
-                    color: $primary_color !important;
-                }
+                @include button-css;
             }
         }
 
@@ -232,4 +228,5 @@
             border-bottom: none; // Remove bottom border for the last child
         }
     }
+}
 }

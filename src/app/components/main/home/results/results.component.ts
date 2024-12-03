@@ -39,8 +39,9 @@ import { NavigationserviceService } from '../../../../services/navigation/naviga
 import { FormatDatePipe } from '../../../../pipes/format-date.pipe';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
-import { ViewmoredialogComponent } from '../viewmoredialog/viewmoredialog.component';
+import { ViewmoredialogComponent } from '../dailogs/viewmoredialog/viewmoredialog.component';
 import { ToastMessages } from '../../../../constants/Toaster/toaster.messages.constants';
+import { SetreminderComponent } from '../dailogs/setreminder/setreminder.component';
 @Component({
   selector: 'app-results',
   standalone: true,
@@ -358,9 +359,19 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     }
   }
   setRemainder(row: OpportunityData) {
-    row.Action.remainder = true;
-    const type = 'info';
-    this.callToaster(ToastMessages.ADD_TO_REMAINDER, type);
+    const element = this.opportunities.find((element) => {
+      console.log(element._source.opportunity_number);
+      console.log(row.Opportunity);
+      return element._source.opportunity_number === row.Opportunity;
+    });
+    this.dialog.open(SetreminderComponent, {
+      data: element?._source,
+      height: '400px',
+      width: '1000px',
+    });
+    // row.Action.remainder = true;
+    // const type = 'info';
+    // this.callToaster(ToastMessages.ADD_TO_REMAINDER, type);
   }
   clearRemainder(row: OpportunityData) {
     row.Action.remainder = false;
@@ -372,12 +383,12 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     this.toast.clear();
     if (type == 'info') {
       this.toast.info(message, '', {
-        timeOut: 500,
+        timeOut: 3000,
         positionClass: 'toast-top-right',
       });
     } else if (type == 'error') {
       this.toast.error(message, '', {
-        timeOut: 500,
+        timeOut: 3000,
         positionClass: 'toast-top-right',
       });
     }

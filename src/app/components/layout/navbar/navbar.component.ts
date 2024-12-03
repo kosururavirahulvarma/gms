@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
       route: 'home/favorites',
     },
     {
-      label: 'Remainders',
+      label: 'Reminders',
       route: 'home/reminder',
     },
   ];

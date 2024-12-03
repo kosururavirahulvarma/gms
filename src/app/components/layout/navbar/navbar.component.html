@@ -1,33 +1,34 @@
 <div class="state-container">
-<mat-toolbar>
-    <button (click)="showDropIcon()" class="button-home" [matMenuTriggerFor]="menu">
-        <div class="button-label"><span>Home</span><mat-icon>keyboard_arrow_down</mat-icon></div>
-    </button>
-</mat-toolbar>
-<!-- @if (showDrop) {
+    <mat-toolbar>
+        <button (click)="showDropIcon()" class="button-home" [matMenuTriggerFor]="menu">
+            <div class="button-label"><span>Home</span><mat-icon>keyboard_arrow_down</mat-icon></div>
+        </button>
+    </mat-toolbar>
+    <!-- @if (showDrop) {
 <div class="drop-up">
     <mat-icon>arrow_drop_up</mat-icon>
 </div>
 } -->
-<br>
-<mat-toolbar class="state-bar">
-@for (history of navigationHistory.routeHistory; track $index) {
-    <div class="state-bar-text">
-        <a [routerLink]="history.path">{{history.routeName | titlecase}}</a>
-    </div>
-}
-</mat-toolbar>
-<mat-menu #menu="matMenu">
-    <div class="navlist">
-    @for (item of navListItems; track $index) {
-        <a class="item-button" (click)="navitageTo(item.route)">{{item.label}}</a>
-    }
-    </div>
-</mat-menu>
-</div>
+    <br>
+    <mat-toolbar class="state-bar">
+        @for (history of navigationHistory.routeHistory; track $index) {
+        <div class="state-bar-text">
+            <a [routerLink]="history.path">{{history.routeName | titlecase}}</a>
+        </div>
+        }
+    </mat-toolbar>
+    <mat-menu #menu="matMenu">
+        <div class="navlist">
+            @for (item of navListItems; track $index) {
+            <a class="item-button" (click)="navitageTo(item.route)">{{item.label}}</a>
+            }
+        </div>
+    </mat-menu>
+
 @for (item of headingBar; track $index) {
-    @if (item.route === navigationHistory.routeHistory[navigationHistory.routeHistory.length-1].routeName) {
-<div class="state-heading-bar-container">
+@if (item.route === navigationHistory.routeHistory[navigationHistory.routeHistory.length-1].routeName) {
+    <br>
+<div class="heading-opp">
     <mat-toolbar class="state-heading-bar">
         <div class="state-heading">
             <a>{{item.label}}</a>
@@ -36,3 +37,4 @@
 </div>
 }
 }
+</div>

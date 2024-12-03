@@ -8,7 +8,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormatDatePipe } from '../../../../pipes/format-date.pipe';
+import { FormatDatePipe } from '../../../../../pipes/format-date.pipe'; 
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 

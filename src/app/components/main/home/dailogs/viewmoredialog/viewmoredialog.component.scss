@@ -1,0 +1,97 @@
+@import '../../../../../../styles.scss';
+
+
+
+
+
+// .header {
+
+//     background-color: $primary_color; // Optional: adds a background color to the heading
+//     height: 30px;
+
+
+//     h2 {
+
+//             color: $white_color; // Text color
+//             font-size: 12px; // Text size
+//             font-weight: bold; // Bold text
+//             font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+//             padding-left: 25px;
+
+
+
+//         }
+
+
+//     }
+
+
+//     .content {
+//         padding: 20px;
+//         overflow-y: auto !important;
+//         max-height: 330px !important; // Adjusted height to account for the heading and actions
+//         p {
+//             font-size: 12px; // Text size
+//             font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+//             color: black;
+
+//             strong {
+//                 color: $primary_color; // Text color
+//             }
+//         }
+//     }
+
+
+
+
+p {
+    color: black;
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+    font-size: 12px !important; // Text size
+
+    strong {
+        color: $primary_color !important; // Text color
+        font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+        font-size: 12px !important; // Text size
+    }
+}
+
+button {
+    @include button-css
+}
+
+.custom-title {
+
+    font-weight: bold !important; // Bold text
+    font-size: 14px !important; // Text size
+
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary_color;
+
+    h6 {
+        color: $white_color !important; // Text color
+        font-size: 14px !important; // Text size
+        font-weight: bold; // Bold text
+        font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+        padding-left: 25px;
+        
+    }
+
+
+        mat-icon {
+            padding-top: 22px;
+            padding-right: 17px;
+            cursor: pointer;
+            font-size: 24px;
+            color: $white_color;
+
+            &:hover {
+                color: red;
+            }
+    }
+}

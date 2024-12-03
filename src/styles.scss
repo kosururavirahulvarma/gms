@@ -4,10 +4,12 @@ body {
   height: 100%;
 }
 
+
 body {
   margin: 0;
   font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
 }
+
 $primary_color: #04345C;
 $button_color: #364E6D;
 $white_color : white;
@@ -17,32 +19,56 @@ $button_hover: #ebb462;
 .primary_color {
   background-color: $button_color !important;
   color: $white_color !important;
-  }
-  
-  .mat-mdc-menu-panel {
-    background-color: $navlist_bg !important;
-    min-width: 234px !important;
-    border-radius: 0 0 6px 6px !important;
-  }
-  
-  
-  .mat-mdc-menu-content,
-  .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
-  
-    font-size: 14px !important;
-    font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
 }
-.font-family{
+
+.mat-mdc-menu-panel {
+  background-color: $navlist_bg !important;
+  min-width: 234px !important;
+  border-radius: 0 0 6px 6px !important;
+}
+
+
+.mat-mdc-menu-content,
+.mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+
+  font-size: 14px !important;
+  font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+}
+
+.font-family {
   font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
 }
 
 .toast-top-right {
-  top: 170px !important;       /* Distance from the top of the page */
-  right: 200px !important;     /* Distance from the right of the page */
-  position: fixed !important; /* Ensures it stays in place */
-  z-index: 9999 !important;   /* Stays above other elements */
+  top: 170px !important;
+  /* Distance from the top of the page */
+  right: 200px !important;
+  /* Distance from the right of the page */
+  position: fixed !important;
+  /* Ensures it stays in place */
+  z-index: 9999 !important;
+  /* Stays above other elements */
 }
 
-.mat-mdc-paginator{
-background-color: #f5f5f5;
+.mat-mdc-paginator {
+  background-color: #f5f5f5;
 }
+
+
+@mixin button-css {
+  color: rgb(245, 245, 245) !important;
+  background-color: $primary_color;
+  height: 30px;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  &:hover {
+    background-color: $button_hover !important;
+    color: $primary_color !important;
+  }
+
+}
+
+
