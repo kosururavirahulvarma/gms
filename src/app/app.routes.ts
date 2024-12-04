@@ -6,6 +6,7 @@ import path from 'path';
 import { OpportunityFinderComponent } from './components/main/home/opportunity-finder/opportunity-finder.component';
 import { RemindersComponent } from './components/main/home/reminders/reminders.component';
 import { FavoritesComponent } from './components/main/home/favorites/favorites.component';
+import { DashboardComponent } from './components/main/home/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,11 @@ export const routes: Routes = [
     component: HomeComponent,
     canActivate: [authGuard],
     children: [
+      {
+        path: '',
+        component:DashboardComponent,
+        canActivate:[authGuard],
+      },
       {
         path: 'opportunity',
         component: OpportunityFinderComponent,

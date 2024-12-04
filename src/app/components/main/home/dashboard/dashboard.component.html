@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="dashboard-main">
+        <div class="dashboard">
+            <mat-card class="dashboard-header" appearance="outlined">
+            <mat-card-content>
+                <div class="header-content">
+                <mat-icon class="header-logo">account_balance</mat-icon>
+                <div class="heading-container">
+                    <span class="heading" >Dashboard</span>
+                    <span class="subheading">Grants Management System</span>
+                </div>
+                </div>
+            </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="dashboard-numbers">
+            <!-- Total Opportunities -->
+            <div class="numbers">
+            <mat-card class="chart-card">
+              <mat-card-content>
+                <div class="chart-content">
+                  <mat-icon class="chart-icon">work_outline</mat-icon>
+                  <div class="chart-details">
+                    <span class="chart-title">Total Opportunities</span>
+                    <span class="chart-number">300</span>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          
+            <!-- Favorites -->
+            <mat-card class="chart-card">
+              <mat-card-content>
+                <div class="chart-content">
+                  <mat-icon class="chart-icon">favorite</mat-icon>
+                  <div class="chart-details">
+                    <span class="chart-title">Favorites</span>
+                    <span class="chart-number">120</span>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          
+            <!-- Reminders -->
+            <mat-card class="chart-card">
+              <mat-card-content>
+                <div class="chart-content">
+                  <mat-icon class="chart-icon">notifications_active</mat-icon>
+                  <div class="chart-details">
+                    <span class="chart-title">Reminders</span>
+                    <span class="chart-number">15</span>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            </div>
+        </div>
+          
+        <div class="dashboard-charts">
+            <div class="charts">
+                <mat-card class="chart-card">
+                    <mat-card-content>
+                        <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="chart-card">
+                    <mat-card-content>
+                        <p-chart type="bar" [data]="barChartData" [options]="horizontalBarChartOptions"></p-chart>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="chart-card">
+                    <mat-card-content>
+                        <p-chart type="pie" [data]="pieChartData" [options]="pieChartOptions"></p-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="dashboard-charts">
+            <div class="charts">
+                <mat-card class="chart-card">
+                    <mat-card-content>
+                        <p-chart type="bar" [data]="combinedChartData" [options]="combinedChartOptions"></p-chart>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="chart-card">
+                    <mat-card-content>
+                        <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="chart-card">
+                    <mat-card-content>
+                        <p-chart type="pie" [data]="donutChartData" [options]="donutChartOptions"></p-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-side">
+        <div class="dashboard-charts">
+            <mat-card class="chart-card">
+                <mat-card-content>
+                    <p-chart type="bar" [data]="favoriteOpportunitiesData" [options]="favoriteOpportunitiesOptions"></p-chart>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="chart-card" style="padding: 90px 0px !important;">
+                <mat-card-content>
+                    <p-chart type="polarArea" [data]="pieChartData" [options]="pieChartOptions" />
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
