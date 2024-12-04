@@ -72,6 +72,8 @@ button {
     display: flex;
     justify-content: space-between;
     background-color: $primary_color;
+    height: 38px;
+    align-items: center;
 
     h6 {
         color: $white_color !important; // Text color
@@ -84,7 +86,6 @@ button {
 
 
         mat-icon {
-            padding-top: 22px;
             padding-right: 17px;
             cursor: pointer;
             font-size: 24px;

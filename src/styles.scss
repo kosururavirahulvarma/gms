@@ -50,6 +50,9 @@ $button_hover: #ebb462;
   /* Stays above other elements */
 }
 
+.toast-container .ngx-toastr {
+  width: 350px !important;
+}
 .mat-mdc-paginator {
   background-color: #f5f5f5;
 }
