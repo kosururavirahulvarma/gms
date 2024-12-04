@@ -6,6 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio'; // Import added
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideClientHydration(),
     provideNativeDateAdapter(),
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: '#04345C' }, 
+    },
   ],
 };

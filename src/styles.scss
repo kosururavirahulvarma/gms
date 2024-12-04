@@ -1,4 +1,5 @@
 // /* You can add global styles to this file, and also import other style files */
+
 html,
 body {
   height: 100%;
@@ -72,6 +73,24 @@ $button_hover: #ebb462;
     color: $primary_color !important;
   }
 
+  &:disabled {
+    background-color: lightgrey;
+    color: darkgray;
+    cursor: not-allowed;
+  }
+
+}
+
+.mat-mdc-radio-button .mat-internal-form-field {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  height: 44px !important;
 }
 
 
+
+
+ 

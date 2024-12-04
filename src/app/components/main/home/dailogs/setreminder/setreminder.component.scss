@@ -1,0 +1,84 @@
+@import '../../../../../../styles.scss';
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary_color;
+    height: 38px;
+    align-items: center;
+
+    h2 {
+  
+        color: $white_color !important; // Text color
+        font-size: 14px !important; // Text size
+        font-weight: bold; // Bold text
+        font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+        padding-left: 25px;
+        height: 49px;
+        
+    }
+
+
+        mat-icon {
+            padding-right: 17px;
+            cursor: pointer;
+            font-size: 24px;
+            color: $white_color !important;
+
+            &:hover {
+                color: red !important;
+            }
+    }
+}
+
+button {
+    @include button-css
+
+    
+}
+
+
+.main-content{
+    color: $primary_color !important; // Text color
+    font-size: 14px !important; // Text size
+    font-weight: bold; // Bold text
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+    p{
+    padding-left: 10px;
+    }
+ 
+
+    mat-form-field{
+        width: 300px !important;
+        
+            padding-left: 13px;
+            padding-top: 10px;
+        
+        mat-label{
+            font-size: 14px !important;
+            font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
+        }
+        input{
+           
+                position: relative;
+                bottom: 7px;
+                font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+                font-size: 12px !important;
+        }
+    }
+
+}
+
+.note{
+    font-size: 14px !important; // Text size
+    padding-left: 12px;
+    color:gray;
+}
+
+span{
+    color: black !important;
+}
+
+
+
+

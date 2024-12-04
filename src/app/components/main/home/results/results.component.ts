@@ -364,14 +364,24 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       console.log(row.Opportunity);
       return element._source.opportunity_number === row.Opportunity;
     });
-    this.dialog.open(SetreminderComponent, {
+    const response = this.dialog.open(SetreminderComponent, {
       data: element?._source,
       height: '400px',
       width: '1000px',
     });
-    // row.Action.remainder = true;
-    // const type = 'info';
-    // this.callToaster(ToastMessages.ADD_TO_REMAINDER, type);
+
+    response.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result) // response can be timestamp or undefined
+      if(result != null || result != undefined){
+        row.Action.remainder = true;
+          const type = 'info';
+          this.callToaster(ToastMessages.ADD_TO_REMAINDER, type);
+      }
+      
+    });
+    
+  
   }
   clearRemainder(row: OpportunityData) {
     row.Action.remainder = false;
