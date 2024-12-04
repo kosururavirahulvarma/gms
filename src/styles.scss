@@ -90,6 +90,14 @@ $button_hover: #ebb462;
   height: 44px !important;
 }
 
+.selected{
+  background-color: $primary_color !important;
+  color: $white_color !important;
+}
+
+.selected .mdc-evolution-chip__text-label {
+  color:  $white_color !important;
+}
 
 
 

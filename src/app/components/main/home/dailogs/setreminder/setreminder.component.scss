@@ -34,7 +34,7 @@
 button {
     @include button-css
 
-    
+
 }
 
 
@@ -78,6 +78,32 @@ button {
 span{
     color: black !important;
 }
+
+section{
+    display: flex;
+    justify-content: space-between;
+    width:60%;
+}
+
+
+mat-radio-group{
+    display:flex;
+    justify-content: space-between;
+    width: 50%;
+}
+mat-chip-listbox{
+
+    mat-chip-option{
+        width: 100px;
+        display: flex; /* Enable flexbox */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        span{
+            padding-left: 15px;
+        }
+    }
+}
+
 
 
 

@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -22,14 +22,18 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
 import { dateNotBeyondDeadlineValidator } from '../../../../../Validations/deadline.validation';
-import { MatTable } from '@angular/material/table';
+import {MatChipsModule} from '@angular/material/chips';
+
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-setreminder',
   standalone: true,
   imports: [
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
@@ -43,12 +47,19 @@ import { MatIcon } from '@angular/material/icon';
     MatDatepickerModule,
     CommonModule,
     MatTooltip,
-    MatIcon
+    MatIcon,
+    FormsModule,
+    MatCheckboxModule
   ],
   templateUrl: './setreminder.component.html',
   styleUrl: './setreminder.component.scss',
 })
 export class SetreminderComponent {
+
+  frequency:string ='';
+  frequencyList : string[] = ['Daily','Weekly','Montly','Quaterly','Half Yearly','Yearly'];
+  selectedModes: string[] = [];
+
   isDateSelected = null; // Flag to check if the user is using a specific date or days
   deadlineDate:Date = new Date();
   constructor(
@@ -70,8 +81,12 @@ export class SetreminderComponent {
   reminderForm!: FormGroup;
   initiateForm() {
     this.reminderForm = this.fb.group({
+      email : [null],
+      inApp : [null],
+      sms : [null],
       reminderDays: [null],
-      reminderDate: [null],
+      reminderDate: [null]
+     
     });
   }
 
@@ -128,5 +143,24 @@ export class SetreminderComponent {
     this.reminderForm.get('reminderDays')?.updateValueAndValidity();
   this.reminderForm.get('reminderDate')?.updateValueAndValidity();
     console.log(this.reminderForm.get('reminderDays'));
+  }
+
+  updateSelectedModes(): void {
+    this.selectedModes = [];
+    if (this.reminderForm.get('email')?.value) {
+      this.selectedModes.push('E-mail');
+    }
+    if (this.reminderForm.get('inApp')?.value) {
+      this.selectedModes.push('In App');
+    }
+    if (this.reminderForm.get('sms')?.value) {
+      this.selectedModes.push('SMS');
+    }
+  }
+  selectedChipIndex: number  = 999; 
+  toggleFrequency(index: number){
+    console.log(index)
+    this.selectedChipIndex =  index;
+
   }
 }

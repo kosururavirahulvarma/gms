@@ -4,8 +4,15 @@
 </div>
 
 <mat-dialog-content class="main-content">
+
   <form [formGroup]="reminderForm">
-    <p>Select how you want to be reminded:</p>
+    <p>Select mode of reminder :</p>
+    <section class="example-section">
+      <mat-checkbox formControlName="email" (change)="updateSelectedModes()">E-mail</mat-checkbox>
+      <mat-checkbox formControlName="inApp" (change)="updateSelectedModes()">In App</mat-checkbox>
+      <mat-checkbox formControlName="sms" (change)="updateSelectedModes()">SMS</mat-checkbox>
+    </section>
+    <p>Select how you want to be reminded :</p>
     <mat-radio-group  aria-label="Reminder Type" (change)="toggleReminderMode($event.value)">
       <mat-radio-button main-contentclss="radio-button" [value]="false"> <span>Number of days before deadline</span></mat-radio-button>
       <mat-radio-button [value]="true"><span>Reminder date</span> </mat-radio-button>
@@ -55,8 +62,19 @@
             }
           </mat-form-field>
         </div>
+      
 
         }
+        <!-- <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Cutest dog breeds">
+          @for (frequency of frequencyList; track frequency) {
+            <mat-chip-option ><span>{{frequency}}</span></mat-chip-option>
+          }
+        </mat-chip-listbox> -->
+        <mat-chip-set >
+          @for (frequency of frequencyList; track $index) {
+          <mat-chip [ngClass]="selectedChipIndex === $index ? 'selected' : ''"  (click)="toggleFrequency($index)">{{frequency}}</mat-chip>
+          }
+        </mat-chip-set>
     }@else {
     <h2 class="note"> NOTE: Please select one of the options above to continue.</h2>
     }
