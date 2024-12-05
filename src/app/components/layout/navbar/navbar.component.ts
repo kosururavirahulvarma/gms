@@ -4,9 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { HomeNavList, NavigationHistory } from '../../../model/HomeNavList';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, NavigationEnd} from '@angular/router';
 import { NavigationserviceService } from '../../../services/navigation/navigationservice.service';
 import { TitleCasePipe } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -58,19 +59,46 @@ export class NavbarComponent implements OnInit {
       label: 'Reminders',
       route: 'reminder',
     },
+    {
+      label: 'Opportunity Name',
+      route: 'view_opportunity',
+    }
   ];
-  
+  isOpportunityId: Boolean = true;
   currentRoute: string = '';
   showDrop: boolean = false;
 
+
   ngOnInit(): void {
+    // Listen for route change events
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd) // Only handle NavigationEnd events
+    ).subscribe(() => {
+      this.handleRouteChange();
+    });
+
+    // Initial history subscription
     this.navigationserviceService.history$.subscribe((history) => {
       console.log(history);
-      // this.history = history;
       this.navigationHistory = history;
       console.log('history component');
       console.log(history);
+      this.handleRouteChange(); // Handle the initial route
     });
+  }
+
+  handleRouteChange() {
+    const lastRoute = this.navigationHistory?.routeHistory?.[this.navigationHistory.routeHistory.length - 1]?.routeName;
+
+    if (
+      lastRoute === 'opportunity' ||
+      lastRoute === 'favorites' ||
+      lastRoute === 'reminder'
+    ) {
+      this.isOpportunityId = false;
+    } else {
+      this.isOpportunityId = true;
+    }
   }
 
   showDropIcon() {

@@ -34,7 +34,7 @@ import {
 } from '../../../../model/Opportunity.model';
 import { grantOpportunities } from '../../../../constants/opportunity/opportunity.constants';
 import { NavigationHistory } from '../../../../model/HomeNavList';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NavigationserviceService } from '../../../../services/navigation/navigationservice.service';
 import { FormatDatePipe } from '../../../../pipes/format-date.pipe';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
@@ -311,16 +311,22 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     this.dataSource.data = this.opportunitiesList;
   }
   view(row: OpportunityData) {
-    const element = this.opportunities.find((element) => {
-      console.log(element._source.opportunity_number);
-      console.log(row.Opportunity);
-      return element._source.opportunity_number === row.Opportunity;
-    });
-    this.dialog.open(ViewmoredialogComponent, {
-      data: element?._source,
-      height: '400px',
-      width: '1000px',
-    });
+    // const element = this.opportunities.find((element) => {
+    //   console.log(element._source.opportunity_number);
+    //   console.log(row.Opportunity);
+    //   return element._source.opportunity_number === row.Opportunity;
+    // });
+    // this.dialog.open(ViewmoredialogComponent, {
+    //   data: element?._source,
+    //   height: '400px',
+    //   width: '1000px',
+    // });
+    if(this.navigationHistory?.routeHistory?.[this.navigationHistory.routeHistory.length - 1]?.routeName === 'opportunity'){
+    this.router.navigate(['home/opportunity',row.Opportunity]);
+    }
+    else if(this.navigationHistory?.routeHistory?.[this.navigationHistory.routeHistory.length - 1]?.routeName === 'favorites'){
+      this.router.navigate(['home/favorites',row.Opportunity]);
+    }
   }
   addToFav(row: OpportunityData) {
     console.log(row);
