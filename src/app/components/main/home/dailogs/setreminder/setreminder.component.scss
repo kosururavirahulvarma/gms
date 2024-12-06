@@ -1,6 +1,6 @@
 @import '../../../../../../styles.scss';
 
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     background-color: $primary_color;
@@ -8,103 +8,103 @@
     align-items: center;
 
     h2 {
-  
+
         color: $white_color !important; // Text color
         font-size: 14px !important; // Text size
         font-weight: bold; // Bold text
         font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
         padding-left: 25px;
         height: 49px;
-        
+
     }
 
 
-        mat-icon {
-            padding-right: 17px;
-            cursor: pointer;
-            font-size: 24px;
-            color: $white_color !important;
+    mat-icon {
+        padding-right: 17px;
+        cursor: pointer;
+        font-size: 24px;
+        color: $white_color !important;
 
-            &:hover {
-                color: red !important;
-            }
+        &:hover {
+            color: red !important;
+        }
     }
 }
 
 button {
     @include button-css
-
-
 }
 
 
-.main-content{
+.main-content {
     color: $primary_color !important; // Text color
     font-size: 14px !important; // Text size
     font-weight: bold; // Bold text
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
-    p{
-    padding-left: 10px;
-    }
- 
 
-    mat-form-field{
+    p {
+        padding-left: 10px;
+    }
+
+
+    mat-form-field {
         width: 300px !important;
-        
-            padding-left: 13px;
-            padding-top: 10px;
-        
-        mat-label{
+
+        padding-left: 13px;
+        padding-top: 10px;
+
+        mat-label {
             font-size: 14px !important;
             font-family: "Lucida Grande", Lucida, Verdana, sans-serif !important;
         }
-        input{
-           
-                position: relative;
-                bottom: 7px;
-                font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
-                font-size: 12px !important;
+
+        input {
+
+            position: relative;
+            bottom: 7px;
+            font-family: ARIAL, Verdana, TAHOMA, TIMES NEW ROMAN !important;
+            font-size: 12px !important;
         }
     }
 
 }
 
-.note{
+.note {
     font-size: 14px !important; // Text size
     padding-left: 12px;
-    color:gray;
+    color: gray;
 }
 
-span{
+span {
     color: black !important;
 }
 
-section{
+section {
     display: flex;
     justify-content: space-between;
-    width:60%;
+    width: 60%;
 }
 
 
-mat-radio-group{
-    display:flex;
+mat-radio-group {
+    display: flex;
     justify-content: space-between;
     width: 50%;
 }
-mat-chip-listbox{
 
-    mat-chip-option{
+mat-chip-listbox {
+
+    mat-chip-option {
         width: 100px;
-        display: flex; /* Enable flexbox */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
-        span{
+        display: flex;
+        /* Enable flexbox */
+        justify-content: center;
+        /* Center horizontally */
+        align-items: center;
+
+        /* Center vertically */
+        span {
             padding-left: 15px;
         }
     }
 }
-
-
-
-
-

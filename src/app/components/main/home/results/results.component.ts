@@ -42,6 +42,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ViewmoredialogComponent } from '../dailogs/viewmoredialog/viewmoredialog.component';
 import { ToastMessages } from '../../../../constants/Toaster/toaster.messages.constants';
 import { SetreminderComponent } from '../dailogs/setreminder/setreminder.component';
+import { ViewStateService } from '../../../../services/views/view-state.service';
 @Component({
   selector: 'app-results',
   standalone: true,
@@ -106,13 +107,17 @@ export class ResultsComponent implements AfterViewInit, OnInit {
   constructor(
     private toast: ToastrService,
     private router: Router,
-    private navigationserviceService: NavigationserviceService
+    private navigationserviceService: NavigationserviceService,
+    private viewStateService: ViewStateService 
   ) {
     this.opportunities.forEach((opportunity) => {
       this.opportunitiesList.push(this.createNewUser(opportunity));
     });
     this.dataSource = new MatTableDataSource(this.opportunitiesList);
   }
+
+  start :any = null;
+  end :any = null;
   readonly dialog = inject(MatDialog);
   ngOnInit(): void {
     const favOpportunities = localStorage.getItem('favOpportunities');
@@ -137,6 +142,58 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     this.range.controls['end'].valueChanges.subscribe((value) => {
       this.applyFilters();
     });
+
+    console.log('constructor called')
+    // Subscribe to the ViewStateService for any updates
+    this.viewStateService.dataState$?.subscribe((data) => {
+      console.log('constructor sub')
+      console.log(data)
+      if(data != null){
+      if (data.length != 0) { // Ensure data is not null or undefined
+        this.dataSource.data = data;
+        console.log('constructor if')
+      } else {
+        console.log('constructor else')
+        console.warn("Received null or undefined dataState from ViewStateService.");
+        // this.dataSource.data = []; // Optionally reset to an empty array
+      }
+    }
+    });
+
+    this.viewStateService.filterState$?.subscribe((filterState) => {
+      if(filterState != null){
+      if (filterState.length != 0) {
+        console.log('filterState cons')
+        console.log(filterState) // Ensure filterState is not null or undefined
+        const agency = filterState;
+        if(agency != null){
+          console.log(agency)
+          if(agency.selectedAgency != null){
+            console.log(agency.selectedAgency)
+            this.selectedAgency =  agency.selectedAgency
+          }
+          if(agency.startDate != null && agency.endDate != null){
+            console.log('start and end date ')
+            // const rangeValues = JSON.parse(agency);
+             this.start = agency.startDate;
+             this.end = agency.endDate
+            console.log(agency)
+          }
+        }
+       
+      } else {
+        console.warn("Received null or undefined filterState from ViewStateService.");
+        // this.selectedAgency = '';
+        // this.range.reset({ start: null, end: null }); // Reset to default state
+      }
+    }
+    });
+    if(this.start != null && this.end != null)
+    this.range.patchValue({
+      start :this.start,
+      end : this.end,
+    });
+
   }
 
   ngAfterViewInit() {
@@ -147,7 +204,6 @@ export class ResultsComponent implements AfterViewInit, OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -289,6 +345,9 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       });
       console.log('Both Agency and Date Filters Applied');
     }
+
+    this.viewStateService.updateFilterState({ selectedAgency, startDate, endDate });
+    this.viewStateService.updateDataState(filteredList);
 
     // Update the data source with the final filtered list
     this.dataSource.data = filteredList;

@@ -1,6 +1,6 @@
 <div class="header">
-<h2 mat-dialog-title>Adding Reminder for {{data.opportunity_number}}</h2>
-<mat-icon (click)="onNoClick()" matTooltip="close" >close</mat-icon> <!-- Cross icon for closing -->
+  <h2 mat-dialog-title>Adding Reminder for {{data.opportunity_number}}</h2>
+  <mat-icon (click)="onNoClick()" matTooltip="close">close</mat-icon> <!-- Cross icon for closing -->
 </div>
 
 <mat-dialog-content class="main-content">
@@ -13,68 +13,70 @@
       <mat-checkbox formControlName="sms" (change)="updateSelectedModes()">SMS</mat-checkbox>
     </section>
     <p>Select how you want to be reminded :</p>
-    <mat-radio-group  aria-label="Reminder Type" (change)="toggleReminderMode($event.value)">
-      <mat-radio-button main-contentclss="radio-button" [value]="false"> <span>Number of days before deadline</span></mat-radio-button>
+    <mat-radio-group aria-label="Reminder Type" (change)="toggleReminderMode($event.value)">
+      <mat-radio-button main-contentclss="radio-button" [value]="false"> <span>Number of days before
+          deadline</span></mat-radio-button>
       <mat-radio-button [value]="true"><span>Reminder date</span> </mat-radio-button>
     </mat-radio-group>
 
     <!-- Number of days reminder -->
 
     @if (isDateSelected != null) {
-        @if(!isDateSelected){
-        <div>
-          <mat-form-field class="small" appearance="fill">
-            <mat-label>Number of Days Before Deadline</mat-label>
-            <input matInput type="number" formControlName="reminderDays" placeholder="Enter number of days">
-            @if(reminderForm.controls['reminderDays'].hasError('min')){
-              <mat-error >
-                Please enter a number greater than 0.
-              </mat-error>
-            }
-        
-            @if(reminderForm.controls['reminderDays'].hasError('required')){
-              <mat-error>
-                Field is required.
-              </mat-error>
-            }
-          </mat-form-field>
-        </div>
-
+    @if(!isDateSelected){
+    <div>
+      <mat-form-field class="small" appearance="fill">
+        <mat-label>Number of Days Before Deadline</mat-label>
+        <input matInput type="number" formControlName="reminderDays" placeholder="Enter number of days">
+        @if(reminderForm.controls['reminderDays'].hasError('min')){
+        <mat-error>
+          Please enter a number greater than 0.
+        </mat-error>
         }
 
-        @else{
-        <!-- Specific date reminder -->
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Reminder Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="reminderDate" placeholder="Pick a date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            @if (reminderForm.controls['reminderDate'].hasError('dateExceedsDeadline')) {
-              <mat-error >
-                Date cannot exceed the deadline ({{ deadlineDate | date:'shortDate' }}).
-              </mat-error>
-            }
-            @if(reminderForm.controls['reminderDate'].hasError('required')){
-              <mat-error >
-                Field is required.
-              </mat-error>
-            }
-          </mat-form-field>
-        </div>
-      
-
+        @if(reminderForm.controls['reminderDays'].hasError('required')){
+        <mat-error>
+          Field is required.
+        </mat-error>
         }
-        <!-- <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Cutest dog breeds">
+      </mat-form-field>
+    </div>
+
+    }
+
+    @else{
+    <!-- Specific date reminder -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Reminder Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="reminderDate" placeholder="Pick a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @if (reminderForm.controls['reminderDate'].hasError('dateExceedsDeadline')) {
+        <mat-error>
+          Date cannot exceed the deadline ({{ deadlineDate | date:'shortDate' }}).
+        </mat-error>
+        }
+        @if(reminderForm.controls['reminderDate'].hasError('required')){
+        <mat-error>
+          Field is required.
+        </mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+
+    }
+    <!-- <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Cutest dog breeds">
           @for (frequency of frequencyList; track frequency) {
             <mat-chip-option ><span>{{frequency}}</span></mat-chip-option>
           }
         </mat-chip-listbox> -->
-        <mat-chip-set >
-          @for (frequency of frequencyList; track $index) {
-          <mat-chip [ngClass]="selectedChipIndex === $index ? 'selected' : ''"  (click)="toggleFrequency($index)">{{frequency}}</mat-chip>
-          }
-        </mat-chip-set>
+    <mat-chip-set>
+      @for (frequency of frequencyList; track $index) {
+      <mat-chip [ngClass]="selectedChipIndex === $index ? 'selected' : ''"
+        (click)="toggleFrequency($index)">{{frequency}}</mat-chip>
+      }
+    </mat-chip-set>
     }@else {
     <h2 class="note"> NOTE: Please select one of the options above to continue.</h2>
     }
@@ -83,5 +85,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button (click)="onSubmit()"  [disabled]="isDateSelected === null">Submit</button>
+  <button mat-button (click)="onSubmit()" [disabled]="isDateSelected === null">Submit</button>
 </mat-dialog-actions>
