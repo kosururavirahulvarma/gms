@@ -63,7 +63,28 @@ $primary_color: #04345C;
                 }
             }
         }
-
+        .back-container{
+            margin-left: 40px;
+            .back{
+                display: flex;
+                flex-direction: row;
+                text-decoration: underline !important;
+                text-decoration-color: #204f7f !important;
+                color: #204f7f !important;
+                cursor: pointer !important;
+                &:hover {
+                    color: darken(#204f7f, 10%) !important;
+                    text-decoration-color: darken(#204f7f, 10%) !important;
+                    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                }
+                .back-icon{
+                    margin-right: 3px;
+                }
+                .back-text{
+                    margin-top: 1px;
+                }
+            }
+        }
         mat-tab-group {
             margin: 20px 30px;
             .tab-content {
