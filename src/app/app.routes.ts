@@ -33,6 +33,13 @@ export const routes: Routes = [
         path: 'opportunity',
         component: OpportunityFinderComponent,
         canActivate: [authGuard],
+        children: [
+          {
+            path: ':opportunity_number',
+            component: ViewOpportunityComponent,
+            canActivate: [authGuard],
+          },
+        ]
       },
       {
         path: 'reminder',
@@ -43,17 +50,14 @@ export const routes: Routes = [
         path: 'favorites',
         component: FavoritesComponent,
         canActivate: [authGuard],
+        children: [
+          {
+            path: ':opportunity_number',
+            component: ViewOpportunityComponent,
+            canActivate: [authGuard],
+          },
+        ]
       },
-      {
-        path: 'opportunity/:opportunity_number',
-        component: ViewOpportunityComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'favorites/:opportunity_number',
-        component: ViewOpportunityComponent,
-        canActivate: [authGuard],
-      }
     ],
   },
 ];

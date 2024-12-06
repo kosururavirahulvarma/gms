@@ -59,6 +59,17 @@ $grey:#eeeeee;
   background-color: #f5f5f5;
 }
 
+.mat-mdc-tab-header{
+  // color: rgb(245, 245, 245) !important;
+  // background-color: $button_color;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+ 
+}
+.mdc-tab__text-label{
+  // color: #FFFFFF !important;
+}
 
 @mixin button-css {
   color: rgb(245, 245, 245) !important;

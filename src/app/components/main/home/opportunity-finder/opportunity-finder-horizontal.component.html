@@ -1,3 +1,4 @@
+@if(navigationHistory.routeHistory[navigationHistory.routeHistory.length-1].routeName === 'opportunity'){
 <div class="parent">
     <div class="childseach">
         <div class="title-search">
@@ -67,3 +68,7 @@
         <app-results></app-results>
     </div>
 </div>
+}
+@else{
+<router-outlet />
+}

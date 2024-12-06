@@ -99,4 +99,17 @@ font-size: 14px;
         color: $primary_color !important;
     }
 }
+.opportunity-number{
+    text-decoration: underline !important;
+    text-decoration-color: #204f7f !important;
+    color: #204f7f !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    &:hover {
+        color: darken(#204f7f, 10%) !important;
+        text-decoration-color: darken(#204f7f, 10%) !important;
+        transform: scale(1.1);
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+}
 

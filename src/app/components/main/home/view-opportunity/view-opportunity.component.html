@@ -1,5 +1,79 @@
 <div class="main">
     <div class="parent">
-        
+        <div class="header">
+            <div class="header-content">
+                <div class="content">
+                    <p><strong>{{  data.opportunity_title }}</strong></p>
+                    <!-- <p><strong>{{ data.agency_name }}</strong></p> -->
+                    <!-- <p><strong>{{ data.close_date | formatDate}}</strong></p> -->
+                    <p><strong>{{ data.grant_url}}</strong></p>
+                </div>
+                <div class="button-container">
+                    <button  class="button" mat-button>Create Proposal</button>
+                </div>
+            </div>
+            <br>
+       <mat-tab-group>
+                <!-- Opportunity Details Tab -->
+                <mat-tab label="Opportunity Details">
+                    <div class="tab-content">
+                        <h3>Opportunity Details</h3>
+                        <p><strong>Description:</strong> {{data.description}}</p>
+                        <p><strong>Agency:</strong> {{ data.agency_name }}</p>
+                        <p><strong>Eligibility:</strong> Non-profit organizations, local governments, and community-based organizations are eligible to apply.</p>
+                        <p><strong>Funding Type:</strong> Grants and Cooperative Agreements.</p>
+                        <p><strong>Funding Amount:</strong> Up to $2,000,000 per project.</p>
+                        <p><strong>Categories:</strong></p>
+                        <ul>
+                            <li>Urban Development</li>
+                            <li>Affordable Housing</li>
+                            <li>Environmental Conservation</li>
+                            <li>Community Empowerment</li>
+                        </ul>
+                        <p><strong>Contact:</strong> For inquiries, email grantsupport&#64;gmail.com or call 1-800-123-4567.</p>
+                    </div>
+                </mat-tab>
+                
+                <!-- Requirements Tab -->
+                <mat-tab label="Requirements">
+                    <div class="tab-content">
+                        <h3>Requirements</h3>
+                        <p><strong>Application Procedure:</strong> Applicants must complete an online application form and submit all required documentation via the grants portal.</p>
+                        <p><strong>Documents Needed:</strong></p>
+                        <ul>
+                            <li>Proof of non-profit status</li>
+                            <li>Detailed project proposal</li>
+                            <li>Financial statements from the past three years</li>
+                            <li>Letters of support from community stakeholders</li>
+                        </ul>
+                        <p><strong>Budget Guidelines:</strong></p>
+                        <ul>
+                            <li>Administrative costs must not exceed 15% of the total budget.</li>
+                            <li>At least 50% of funds should be allocated to direct community benefits.</li>
+                            <li>Matching funds are not required but are encouraged.</li>
+                        </ul>
+                        <p><strong>Evaluation Criteria:</strong> Proposals will be evaluated based on impact, feasibility, and alignment with program objectives.</p>
+                    </div>
+                </mat-tab>
+                
+                <!-- Timeline Tab -->
+                <mat-tab label="Timeline">
+                    <div class="tab-content">
+                        <h3>Timeline</h3>
+                        <p><strong>Release Date:</strong> 1st January 2024</p>
+                        <p><strong>Open Date:</strong> 15th January 2024</p>
+                        <p><strong>Deadline :</strong> {{ data.close_date | formatDateInWords}}</p>
+                        <p><strong>Milestones:</strong></p>
+                        <ul>
+                            <li><strong>Application Submission Deadline:</strong> 31st March 2024</li>
+                            <li><strong>Preliminary Review Results:</strong> 15th April 2024</li>
+                            <li><strong>Final Decision Announcement:</strong> 30th June 2024</li>
+                            <li><strong>Project Kickoff:</strong> 1st August 2024</li>
+                        </ul>
+                        <p><strong>Note:</strong> All dates are subject to change. Regularly check the grant portal for updates.</p>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
     </div>
 </div>

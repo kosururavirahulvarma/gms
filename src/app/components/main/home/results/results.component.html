@@ -37,7 +37,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="Opportunity">
         <th class="font-family" mat-header-cell *matHeaderCellDef mat-sort-header> Opportunity # </th>
-        <td class="font-family" mat-cell *matCellDef="let row"> {{row.Opportunity}} </td>
+        <td class="font-family" mat-cell *matCellDef="let row"> <a class="opportunity-number" (click)="view(row)">{{row.Opportunity}} </a></td>
       </ng-container>
 
       <!-- Progress Column -->
