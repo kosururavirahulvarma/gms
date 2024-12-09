@@ -50,7 +50,7 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
-        path: 'favorites/:opportunity_number',
+        path: 'favorites/:favorite_opportunity_number',
         component: ViewOpportunityComponent,
         canActivate: [authGuard],
       },
