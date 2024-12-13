@@ -108,7 +108,7 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     private toast: ToastrService,
     private router: Router,
     private navigationserviceService: NavigationserviceService,
-    private viewStateService: ViewStateService 
+    private viewStateService: ViewStateService
   ) {
     this.opportunities.forEach((opportunity) => {
       this.opportunitiesList.push(this.createNewUser(opportunity));
@@ -116,8 +116,8 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     this.dataSource = new MatTableDataSource(this.opportunitiesList);
   }
 
-  start :any = null;
-  end :any = null;
+  start: any = null;
+  end: any = null;
   readonly dialog = inject(MatDialog);
   ngOnInit(): void {
     const favOpportunities = localStorage.getItem('favOpportunities');
@@ -131,6 +131,53 @@ export class ResultsComponent implements AfterViewInit, OnInit {
         this.opportunitiesList.push(this.createNewUser(opportunity));
       });
       this.dataSource.data = this.opportunitiesList;
+      this.viewStateService.favDataState$?.subscribe((data) => {
+        console.log('constructor sub');
+        console.log(data);
+        if (data != null) {
+          if (data.length != 0) {
+            // Ensure data is not null or undefined
+            this.dataSource.data = data;
+            console.log('constructor if');
+          } else {
+            console.log('constructor else');
+            console.warn(
+              'Received null or undefined dataState from ViewStateService.'
+            );
+            // this.dataSource.data = []; // Optionally reset to an empty array
+          }
+        }
+      });
+
+      this.viewStateService.favFilterState$?.subscribe((filterState) => {
+        if (filterState != null) {
+          if (filterState.length != 0) {
+            console.log('filterState cons');
+            console.log(filterState); // Ensure filterState is not null or undefined
+            const agency = filterState;
+            if (agency != null) {
+              console.log(agency);
+              if (agency.selectedAgency != null) {
+                console.log(agency.selectedAgency);
+                this.selectedAgency = agency.selectedAgency;
+              }
+              if (agency.startDate != null && agency.endDate != null) {
+                console.log('start and end date ');
+                // const rangeValues = JSON.parse(agency);
+                this.start = agency.startDate;
+                this.end = agency.endDate;
+                console.log(agency);
+              }
+            }
+          } else {
+            console.warn(
+              'Received null or undefined filterState from ViewStateService.'
+            );
+            // this.selectedAgency = '';
+            // this.range.reset({ start: null, end: null }); // Reset to default state
+          }
+        }
+      });
     }
     this.navigationserviceService.history$.subscribe((history) => {
       console.log(history);
@@ -143,57 +190,63 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       this.applyFilters();
     });
 
-    console.log('constructor called')
+    console.log('constructor called');
+    console.log(this.screen);
     // Subscribe to the ViewStateService for any updates
-    this.viewStateService.dataState$?.subscribe((data) => {
-      console.log('constructor sub')
-      console.log(data)
-      if(data != null){
-      if (data.length != 0) { // Ensure data is not null or undefined
-        this.dataSource.data = data;
-        console.log('constructor if')
-      } else {
-        console.log('constructor else')
-        console.warn("Received null or undefined dataState from ViewStateService.");
-        // this.dataSource.data = []; // Optionally reset to an empty array
-      }
-    }
-    });
-
-    this.viewStateService.filterState$?.subscribe((filterState) => {
-      if(filterState != null){
-      if (filterState.length != 0) {
-        console.log('filterState cons')
-        console.log(filterState) // Ensure filterState is not null or undefined
-        const agency = filterState;
-        if(agency != null){
-          console.log(agency)
-          if(agency.selectedAgency != null){
-            console.log(agency.selectedAgency)
-            this.selectedAgency =  agency.selectedAgency
-          }
-          if(agency.startDate != null && agency.endDate != null){
-            console.log('start and end date ')
-            // const rangeValues = JSON.parse(agency);
-             this.start = agency.startDate;
-             this.end = agency.endDate
-            console.log(agency)
+    if (this.screen === 'opportunity') {
+      this.viewStateService.dataState$?.subscribe((data) => {
+        console.log('constructor sub');
+        console.log(data);
+        if (data != null) {
+          if (data.length != 0) {
+            // Ensure data is not null or undefined
+            this.dataSource.data = data;
+            console.log('constructor if');
+          } else {
+            console.log('constructor else');
+            console.warn(
+              'Received null or undefined dataState from ViewStateService.'
+            );
+            // this.dataSource.data = []; // Optionally reset to an empty array
           }
         }
-       
-      } else {
-        console.warn("Received null or undefined filterState from ViewStateService.");
-        // this.selectedAgency = '';
-        // this.range.reset({ start: null, end: null }); // Reset to default state
-      }
-    }
-    });
-    if(this.start != null && this.end != null)
-    this.range.patchValue({
-      start :this.start,
-      end : this.end,
-    });
+      });
 
+      this.viewStateService.filterState$?.subscribe((filterState) => {
+        if (filterState != null) {
+          if (filterState.length != 0) {
+            console.log('filterState cons');
+            console.log(filterState); // Ensure filterState is not null or undefined
+            const agency = filterState;
+            if (agency != null) {
+              console.log(agency);
+              if (agency.selectedAgency != null) {
+                console.log(agency.selectedAgency);
+                this.selectedAgency = agency.selectedAgency;
+              }
+              if (agency.startDate != null && agency.endDate != null) {
+                console.log('start and end date ');
+                // const rangeValues = JSON.parse(agency);
+                this.start = agency.startDate;
+                this.end = agency.endDate;
+                console.log(agency);
+              }
+            }
+          } else {
+            console.warn(
+              'Received null or undefined filterState from ViewStateService.'
+            );
+            // this.selectedAgency = '';
+            // this.range.reset({ start: null, end: null }); // Reset to default state
+          }
+        }
+      });
+    }
+    if (this.start != null && this.end != null)
+      this.range.patchValue({
+        start: this.start,
+        end: this.end,
+      });
   }
 
   ngAfterViewInit() {
@@ -345,10 +398,22 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       });
       console.log('Both Agency and Date Filters Applied');
     }
-
-    this.viewStateService.updateFilterState({ selectedAgency, startDate, endDate });
-    this.viewStateService.updateDataState(filteredList);
-
+    if (this.screen === 'opportunity') {
+      this.viewStateService.updateFilterState({
+        selectedAgency,
+        startDate,
+        endDate,
+      });
+      this.viewStateService.updateDataState(filteredList);
+    }
+    if (this.screen === 'favorites') {
+      this.viewStateService.updateFavFilterState({
+        selectedAgency,
+        startDate,
+        endDate,
+      });
+      this.viewStateService.updateFavDataState(filteredList);
+    }
     // Update the data source with the final filtered list
     this.dataSource.data = filteredList;
   }
@@ -380,11 +445,18 @@ export class ResultsComponent implements AfterViewInit, OnInit {
     //   height: '400px',
     //   width: '1000px',
     // });
-    if(this.navigationHistory?.routeHistory?.[this.navigationHistory.routeHistory.length - 1]?.routeName === 'opportunity'){
-    this.router.navigate(['home/opportunity',row.Opportunity]);
-    }
-    else if(this.navigationHistory?.routeHistory?.[this.navigationHistory.routeHistory.length - 1]?.routeName === 'favorites'){
-      this.router.navigate(['home/favorites',row.Opportunity]);
+    if (
+      this.navigationHistory?.routeHistory?.[
+        this.navigationHistory.routeHistory.length - 1
+      ]?.routeName === 'opportunity'
+    ) {
+      this.router.navigate(['home/opportunity', row.Opportunity]);
+    } else if (
+      this.navigationHistory?.routeHistory?.[
+        this.navigationHistory.routeHistory.length - 1
+      ]?.routeName === 'favorites'
+    ) {
+      this.router.navigate(['home/favorites', row.Opportunity]);
     }
   }
   addToFav(row: OpportunityData) {
@@ -416,7 +488,7 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       'favOpportunities',
       JSON.stringify(this.favOpportunities)
     );
-    if(this.screen === 'favorites'){
+    if (this.screen === 'favorites') {
       this.opportunitiesList = this.opportunitiesList.filter(
         (fav) => fav.Opportunity !== row.Opportunity
       );
@@ -435,18 +507,15 @@ export class ResultsComponent implements AfterViewInit, OnInit {
       width: '1000px',
     });
 
-    response.afterClosed().subscribe(result => {
+    response.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      console.log(result) // response can be timestamp or undefined
-      if(result != null || result != undefined){
+      console.log(result); // response can be timestamp or undefined
+      if (result != null || result != undefined) {
         row.Action.remainder = true;
-          const type = 'info';
-          this.callToaster(ToastMessages.ADD_TO_REMAINDER, type);
+        const type = 'info';
+        this.callToaster(ToastMessages.ADD_TO_REMAINDER, type);
       }
-      
     });
-    
-  
   }
   clearRemainder(row: OpportunityData) {
     row.Action.remainder = false;

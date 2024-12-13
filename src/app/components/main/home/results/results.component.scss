@@ -94,6 +94,7 @@ font-size: 14px;
     height: 24px !important;
     border-radius: 5px;
     margin-left: 25px;
+    border: 2px solid black;
     &:hover{
         background-color:$button_hover !important;
         color: $primary_color !important;

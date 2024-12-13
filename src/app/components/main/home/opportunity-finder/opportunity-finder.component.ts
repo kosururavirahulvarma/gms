@@ -20,6 +20,7 @@ import { NavigationHistory } from '../../../../model/HomeNavList';
   styleUrl: './opportunity-finder-horizontal.component.scss'
 })
 export class OpportunityFinderComponent {
+  page :string = 'opportunity';
   selectedTextArea?:string
   selectedRadioOption?: string;
   selectedDropOption?:string;
